@@ -32,7 +32,12 @@ bool ModeManager::startMode() {
         return false;
     }
     
-    return transitionTo(STATE_RUNNING);
+    if (!transitionTo(STATE_RUNNING)) {
+        return false;
+    }
+
+    lastCommandTime = millis();
+    return true;
 }
 
 bool ModeManager::stopMode() {

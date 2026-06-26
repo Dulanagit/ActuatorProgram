@@ -95,7 +95,11 @@ void processModeCommand(const char* cmdBuffer) {
     switch (modeCmd) {
         case MODE_CMD_SET:
             if (!ModeManager::setMode(mode)) {
-                ResponseBuilder::sendError(ERR_MODE_CANNOT_CHANGE_RUNNING, "Cannot change mode while running");
+                if (ModeManager::getState() == STATE_RUNNING) {
+                    ResponseBuilder::sendError(ERR_MODE_CANNOT_CHANGE_RUNNING, "Cannot change mode while running");
+                } else {
+                    ResponseBuilder::sendError(ERR_MODE_INVALID_TRANSITION, "Invalid mode transition");
+                }
                 return;
             }
             ResponseBuilder::sendStatus(ModeManager::getMode(), ModeManager::getState());

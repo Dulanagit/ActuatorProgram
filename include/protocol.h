@@ -68,7 +68,7 @@ enum ModeCommand {
 
 // ==================== TIMEOUT & COMMUNICATION ====================
 #define SERIAL_BAUD_RATE              115200
-#define COMMAND_TIMEOUT_MS            5000  // 5 seconds
+#define COMMAND_TIMEOUT_MS            30000  // 30 seconds
 #define SERIAL_BUFFER_SIZE            256
 #define COMMAND_TERMINATOR            '\n'
 
